@@ -6,7 +6,16 @@ class Settings(BaseSettings):
     debug: bool = False
 
     # Database
-    database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/maileragent"
+    db_host: str = "localhost"
+    db_port: int = 5432
+    db_name: str = "maileragent"
+    db_user: str = "postgres"
+    db_password: str = "postgres"
+    db_driver: str = "asyncpg"
+
+    @property
+    def database_url(self) -> str:
+        return f"postgresql+{self.db_driver}://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}"
 
     # JWT
     jwt_secret: str = "change-me-in-production"
