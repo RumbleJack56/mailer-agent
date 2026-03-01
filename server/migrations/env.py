@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from server.config import settings
 from server.database import Base
-import server.models  # noqa: Load models for autogenerate
+import server.schemas  # noqa: Load models for autogenerate
 
 config = context.config
 

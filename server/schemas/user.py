@@ -4,10 +4,11 @@ from datetime import datetime
 from sqlalchemy import Boolean, ForeignKey, String, DateTime
 from sqlalchemy.dialects.postgresql import ENUM, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.sql import func
 
 from server.database import Base
-from server.models.enums import AuthProviderEnum, GlobalRoleEnum
-from server.models.mixins import TimestampMixin, UUIDMixin
+from server.schemas.enums import AuthProviderEnum, GlobalRoleEnum
+from server.schemas.mixins import TimestampMixin, UUIDMixin
 
 
 class User(Base, UUIDMixin, TimestampMixin):
@@ -39,9 +40,11 @@ class EmailVerification(Base, UUIDMixin):
     __tablename__ = "email_verifications"
 
     user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
+        UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
     )
     token_hash: Mapped[str] = mapped_column(String(255), unique=True, nullable=False, index=True)
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
-
+    used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    
     user: Mapped["User"] = relationship("User", back_populates="verifications")
