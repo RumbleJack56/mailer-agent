@@ -3,6 +3,7 @@ import styles from "./layout.module.css";
 import Link from "next/link";
 
 const items = [
+    // TODO(Phase 2): Make hrefs dynamic using useParams() hook for active group context
     { label: "Dashboard", href: "/dashboard", icon: "📊" },
     { label: "Groups", href: "/groups/1", icon: "📁" }, /* mock link */
     { label: "Members", href: "/groups/1/members", icon: "👥" },
