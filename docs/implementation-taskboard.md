@@ -41,13 +41,13 @@
 ## Phase 1: Database & Models
 
 ### `feature/p1-db-enums-and-users`
-- [ ] Create enum types: `global_role_enum`, `group_role_enum`, `auth_provider_enum`, `mail_status_enum`, `notification_type_enum`
-- [ ] Create `users` table with all auth fields (`password_hash`, `provider`, `google_id`, `email_verified`)
-- [ ] Create `email_verifications` table
-- [ ] Add `update_updated_at()` trigger function
-- [ ] Write SQLAlchemy models for `User`, `EmailVerification`
-- [ ] Create alembic migration
-- [ ] Verify: migration runs against Docker Postgres, tables created
+- [x] Create enum types: `global_role_enum`, `group_role_enum`, `auth_provider_enum`, `mail_status_enum`, `notification_type_enum`
+- [x] Create `users` table with all auth fields (`password_hash`, `provider`, `google_id`, `email_verified`)
+- [x] Create `email_verifications` table
+- [x] Add `update_updated_at()` trigger function
+- [x] Write SQLAlchemy models for `User`, `EmailVerification`
+- [x] Create alembic migration
+- [x] Verify: migration runs against Docker Postgres, tables created
 
 ### `feature/p1-groups-and-membership`
 - [ ] Create `groups` table

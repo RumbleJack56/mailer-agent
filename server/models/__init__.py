@@ -6,6 +6,7 @@ from server.models.enums import (
     NotificationTypeEnum,
 )
 from server.models.mixins import TimestampMixin, UUIDMixin
+from server.models.user import EmailVerification, User
 
 __all__ = [
     "GlobalRoleEnum",
@@ -18,5 +19,3 @@ __all__ = [
     "User",
     "EmailVerification",
 ]
-
-from server.models.user import EmailVerification, User
