@@ -15,4 +15,8 @@ __all__ = [
     "NotificationTypeEnum",
     "TimestampMixin",
     "UUIDMixin",
+    "User",
+    "EmailVerification",
 ]
+
+from server.models.user import EmailVerification, User
