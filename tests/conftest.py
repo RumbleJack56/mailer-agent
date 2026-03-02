@@ -29,3 +29,35 @@ async def db_session():
     
     await connection.close()
     await engine.dispose()
+
+
+@pytest_asyncio.fixture()
+async def user_fixture(db_session: AsyncSession):
+    from server.schemas.user import User
+    from server.schemas.enums import AuthProviderEnum, GlobalRoleEnum
+    
+    user = User(
+        email="fixture_user@example.com",
+        name="Fixture User",
+        provider=AuthProviderEnum.email,
+        global_role=GlobalRoleEnum.user,
+    )
+    db_session.add(user)
+    await db_session.commit()
+    await db_session.refresh(user)
+    return user
+
+
+@pytest_asyncio.fixture()
+async def group_fixture(db_session: AsyncSession, user_fixture):
+    from server.schemas.group import Group
+    
+    group = Group(
+        name="Fixture Group",
+        description="A group for testing",
+        created_by=user_fixture.id,
+    )
+    db_session.add(group)
+    await db_session.commit()
+    await db_session.refresh(group)
+    return group
