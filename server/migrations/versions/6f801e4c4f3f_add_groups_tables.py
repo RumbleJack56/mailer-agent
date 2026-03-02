@@ -41,6 +41,16 @@ def upgrade() -> None:
     )
     op.create_index(op.f('ix_user_groups_group_id'), 'user_groups', ['group_id'], unique=False)
     op.create_index(op.f('ix_user_groups_role'), 'user_groups', ['role'], unique=False)
+    
+    # Add trigger for group updated_at
+    op.execute(
+        """
+        CREATE TRIGGER update_groups_updated_at
+        BEFORE UPDATE ON groups
+        FOR EACH ROW
+        EXECUTE FUNCTION update_updated_at_column();
+        """
+    )
     # ### end Alembic commands ###
 
 
@@ -51,4 +61,9 @@ def downgrade() -> None:
     op.drop_table('user_groups')
     op.drop_index(op.f('ix_groups_created_by'), table_name='groups')
     op.drop_table('groups')
+    
+    # Drop trigger for group updated_at
+    op.execute("DROP TRIGGER IF EXISTS update_groups_updated_at ON groups")
+    
+    op.execute("DROP TYPE IF EXISTS group_role_enum")
     # ### end Alembic commands ###
