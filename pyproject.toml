@@ -35,4 +35,8 @@ asyncio_mode = "auto"
 testpaths = ["tests"]
 
 [tool.setuptools]
-packages = ["server"]
+packages = { find = {} }
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["server*"]
