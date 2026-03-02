@@ -34,6 +34,10 @@ class User(Base, UUIDMixin, TimestampMixin):
     verifications: Mapped[list["EmailVerification"]] = relationship(
         "EmailVerification", back_populates="user", cascade="all, delete-orphan"
     )
+    
+    groups: Mapped[list["UserGroup"]] = relationship(
+        "UserGroup", back_populates="user", cascade="all, delete-orphan"
+    )
 
 
 class EmailVerification(Base, UUIDMixin):

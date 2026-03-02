@@ -7,6 +7,7 @@ from server.schemas.enums import (
 )
 from server.schemas.mixins import TimestampMixin, UUIDMixin
 from server.schemas.user import EmailVerification, User
+from server.schemas.group import Group, UserGroup
 
 __all__ = [
     "GlobalRoleEnum",
