@@ -13,6 +13,13 @@ class GroupRoleEnum(str, enum.Enum):
     owner = 'owner'
     root = 'root'
 
+class GroupRoleEnum(str, enum.Enum):
+    user = 'user'
+    moderator = 'moderator'
+    admin = 'admin'
+    owner = 'owner'
+    root = 'root'
+
 class AuthProviderEnum(str, enum.Enum):
     email = 'email'
     google = 'google'
